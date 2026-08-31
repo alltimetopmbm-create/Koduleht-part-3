@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+  section[id] { scroll-margin-top: 90px; }
+  body { overflow-x: hidden; }
+  @media (max-width: 900px) { html { scroll-padding-top: 76px; } section[id] { scroll-margin-top: 76px; } }
+  @media (max-width: 900px) {
+    [data-lbx="overlay"] { padding: 20px !important; gap: 12px !important; }
+    [data-lbx="row"] { gap: 10px !important; }
+    [data-lbx="row"] > button { width: 40px !important; height: 40px !important; }
+    [data-lbx="row"] > img { max-height: 68vh !important; }
+  }
+  @media (max-width: 640px) {
+    [data-lbx="overlay"] { padding: 12px !important; }
+    [data-lbx="row"] { gap: 8px !important; }
+    [data-lbx="row"] > img { max-width: calc(100% - 90px) !important; max-height: 66vh !important; }
+    [data-lbx="row"] > button { width: 36px !important; height: 36px !important; font-size: 16px !important; }
+  }
+  @media (max-width: 640px) { html { scroll-padding-top: 68px; } section[id] { scroll-margin-top: 68px; } }
+  body { margin: 0; background-color: #fbf6f5; background-image: radial-gradient(circle at 10px 10px, rgba(0,0,0,0.035) 1.1px, transparent 1.6px), radial-gradient(circle at 30px 30px, rgba(0,0,0,0.028) 1.1px, transparent 1.6px), radial-gradient(circle at 20px 34px, rgba(0,0,0,0.02) 0.9px, transparent 1.4px); background-size: 40px 40px, 40px 40px, 40px 40px; color: #000000; font-family: Didot, 'Didot LT STD', 'Hoefler Text', 'Cormorant Garamond', Garamond, Georgia, serif; }
+  a { color: #000000; text-decoration: none; }
+  a:hover { color: oklch(0.55 0.09 20); }
+  * { box-sizing: border-box; }
+  [data-nav-toggle] { display: none; }
+  [data-nav-mobile] { display: none; }
+  @media (max-width: 900px) {
+    #kontakt { padding: 64px 28px !important; }
+    #kontakt [data-r="two"] { gap: 40px !important; }
+    [data-r="form"] { gap: 16px !important; }
+    header { padding: 14px 24px !important; }
+    [data-nav-desktop] { display: none !important; }
+    [data-nav-toggle] { display: flex !important; }
+    [data-nav-mobile] { display: block !important; }
+    section { padding-left: 28px !important; padding-right: 28px !important; }
+    #algus > [data-r="two"] { padding: 48px 28px !important; }
+    [data-r="lead"] { padding: 44px 28px !important; }
+    [data-r="two"] { grid-template-columns: 1fr !important; gap: 32px !important; }
+    [data-r="galerii"] { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; }
+    footer { padding: 28px !important; }
+  }
+  @media (max-width: 640px) {
+    [data-r="form"] { grid-template-columns: 1fr !important; gap: 14px !important; }
+    [data-r="form"] > div[style=""], [data-r="form"] > div:empty { display: none !important; }
+    [data-r="form"] input, [data-r="form"] select, [data-r="form"] textarea { padding: 12px 0 !important; }
+    [data-r="form"] button[type="submit"] { width: 100%; text-align: center; padding: 16px 24px !important; }
+    #kontakt { padding: 48px 20px !important; }
+    #kontakt h2 { font-size: 28px !important; }
+    [data-hide-mobile] { display: none; }
+    header { padding: 12px 20px !important; }
+    section { padding-left: 20px !important; padding-right: 20px !important; padding-top: 56px !important; padding-bottom: 56px !important; }
+    #algus > [data-r="two"] { padding: 36px 20px !important; }
+    #algus > div:first-child { grid-template-columns: repeat(2, 1fr) !important; }
+    [data-r="lead"] { padding: 36px 20px !important; }
+    [data-r="galerii"] { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+    footer { padding: 24px 20px !important; }
+  }
+</style>
+</helmet>
+
+<div style="max-width: 100%">
+
+  <header style="position: sticky; top: 0; z-index: 50; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; row-gap: 12px; column-gap: 24px; padding: 18px 40px; background: rgba(251,246,245,0.92); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(0,0,0,0.09)">
+    <a href="index.html" style="font-family: Didot, 'Didot LT STD', 'Hoefler Text', 'Cormorant Garamond', Garamond, Georgia, serif; font-size: 22px; letter-spacing: 0.14em; text-transform: uppercase">Ivika Kübarsepp</a>
+    <nav data-nav-desktop="1" style="display: flex; flex-wrap: wrap; align-items: center; row-gap: 10px; column-gap: clamp(14px, 1.8vw, 28px); font-size: clamp(12px, 1.15vw, 13.5px); letter-spacing: 0.08em; text-transform: uppercase; font-weight: 500">
+      <span style="position: relative; display: inline-flex; align-items: center" onMouseEnter="{{ openSub }}" onMouseLeave="{{ closeSub }}">
+        <a href="index.html#tooted" style="display: inline-flex; align-items: center; gap: 7px">Kudumid <span style="font-size: 9px; opacity: 0.6">▾</span></a>
+        <span style="position: absolute; top: 100%; left: -18px; min-width: 268px; padding-top: 14px; opacity: {{ subOpacity }}; visibility: {{ subVis }}; transition: opacity 200ms ease">
+          <span style="display: flex; flex-direction: column; padding: 8px 0; background: #fffcfb; border: 1px solid rgba(0,0,0,0.12); box-shadow: 0 14px 34px rgba(0,0,0,0.08)">
+            <a href="perfektsed-kleidid.html" style="padding: 11px 22px; font-size: 12.5px; letter-spacing: 0.06em" style-hover="background: #f8eeee; color: oklch(0.44 0.09 8)">Perfektsed kleidid</a>
+            <a href="vabaajakleidid.html" style="padding: 11px 22px; font-size: 12.5px; letter-spacing: 0.06em" style-hover="background: #f8eeee; color: oklch(0.44 0.09 8)">Vabaaja- ja laste kleidid</a>
+            <a href="aksessuaarid.html" style="padding: 11px 22px; font-size: 12.5px; letter-spacing: 0.06em" style-hover="background: #f8eeee; color: oklch(0.44 0.09 8)">Aksessuaarid</a>
+            <a href="haapsalu-sallid.html" style="padding: 11px 22px; font-size: 12.5px; letter-spacing: 0.06em" style-hover="background: #f8eeee; color: oklch(0.44 0.09 8)">Haapsalu sallid ja -rätid</a>
+            <a href="beebidele.html" style="padding: 11px 22px; font-size: 12.5px; letter-spacing: 0.06em" style-hover="background: #f8eeee; color: oklch(0.44 0.09 8)">Beebidele</a>
+            <a href="index.html#tooted" style="padding: 11px 22px; font-size: 12.5px; letter-spacing: 0.06em" style-hover="background: #f8eeee; color: oklch(0.44 0.09 8)">Laos</a>
+          </span>
+        </span>
+      </span>
+      <a href="index.html#minust">Minust</a>
+      <a href="index.html#koolitused">Koolitused</a>
+      <a href="index.html#lood">Kliendi lugu</a>
+      <a href="index.html#kkk">KKK</a>
+      <a href="#kontakt" data-hide-mobile="1" style="padding: 10px 20px; border: 1px solid rgba(0,0,0,0.35); border-radius: 999px" style-hover="background: oklch(0.44 0.09 8); color: #fdf7f6; border-color: oklch(0.44 0.09 8)">Võta ühendust</a>
+    </nav>
+
+    <button type="button" data-nav-toggle="1" aria-label="Menüü" onClick="{{ toggleMenu }}" style="width: 46px; height: 46px; flex-direction: column; align-items: center; justify-content: center; gap: 5px; padding: 0; background: none; border: 1px solid rgba(0,0,0,0.25); border-radius: 999px; cursor: pointer" style-hover="border-color: oklch(0.44 0.09 8)">
+      <span style="display: block; width: 18px; height: 1px; background: #000000"></span>
+      <span style="display: block; width: 18px; height: 1px; background: #000000"></span>
+      <span style="display: block; width: 18px; height: 1px; background: #000000"></span>
+    </button>
+
+    <nav data-nav-mobile="1" style="width: 100%; max-height: {{ menuH }}; overflow: hidden; transition: max-height 300ms ease">
+      <div style="display: flex; flex-direction: column; gap: 2px; padding: 10px 0 4px; font-size: 14px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 500">
+        <a href="index.html#tooted" style="padding: 13px 0; border-top: 1px solid rgba(0,0,0,0.12)">Kudumid</a>
+        <a href="perfektsed-kleidid.html" style="padding: 10px 0 10px 18px; font-size: 12.5px; font-weight: 400; text-transform: none; letter-spacing: 0.02em; opacity: 0.8">Perfektsed kleidid</a>
+        <a href="vabaajakleidid.html" style="padding: 10px 0 10px 18px; font-size: 12.5px; font-weight: 400; text-transform: none; letter-spacing: 0.02em; opacity: 0.8">Vabaaja- ja laste kleidid</a>
+        <a href="aksessuaarid.html" style="padding: 10px 0 10px 18px; font-size: 12.5px; font-weight: 400; text-transform: none; letter-spacing: 0.02em; opacity: 0.8">Aksessuaarid</a>
+        <a href="haapsalu-sallid.html" style="padding: 10px 0 10px 18px; font-size: 12.5px; font-weight: 400; text-transform: none; letter-spacing: 0.02em; opacity: 0.8">Haapsalu sallid ja -rätid</a>
+        <a href="beebidele.html" style="padding: 10px 0 10px 18px; font-size: 12.5px; font-weight: 400; text-transform: none; letter-spacing: 0.02em; opacity: 0.8">Beebidele</a>
+        <a href="index.html#tooted" style="padding: 10px 0 14px 18px; font-size: 12.5px; font-weight: 400; text-transform: none; letter-spacing: 0.02em; opacity: 0.8">Laos</a>
+        <a href="index.html#minust" style="padding: 13px 0; border-top: 1px solid rgba(0,0,0,0.12)">Minust</a>
+        <a href="index.html#koolitused" style="padding: 13px 0; border-top: 1px solid rgba(0,0,0,0.12)">Koolitused</a>
+        <a href="index.html#lood" style="padding: 13px 0; border-top: 1px solid rgba(0,0,0,0.12)">Kliendi lugu</a>
+        <a href="index.html#kkk" style="padding: 13px 0; border-top: 1px solid rgba(0,0,0,0.12)">KKK</a>
+        <a href="#kontakt" style="margin-top: 12px; padding: 14px 22px; align-self: flex-start; background: oklch(0.44 0.09 8); color: #fdf7f6; border-radius: 999px">Võta ühendust</a>
+      </div>
+    </nav>
+  </header>
+
+  <section id="algus" data-screen-label="Beebidele" style="display: flex; flex-direction: column; padding: 0; border-bottom: 1px solid rgba(0,0,0,0.09)">
+    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px">
+      <img src="beebitekk-jalad.jpg" alt="Beebi jalad pitsist teki all" data-lb="1" onClick="{{ openImg }}" style="display: block; width: 100%; aspect-ratio: 1; object-fit: cover; cursor: zoom-in">
+      <img src="beebitekk-helesinine-diivanil.jpg" alt="Helesinine beebitekk ümara lehe kirjas" data-lb="1" onClick="{{ openImg }}" style="display: block; width: 100%; aspect-ratio: 1; object-fit: cover; cursor: zoom-in">
+      <img src="beebitekk-roosa.jpg" alt="Roosa meriinovillane beebitekk, ümara lehe kiri" data-lb="1" onClick="{{ openImg }}" style="display: block; width: 100%; aspect-ratio: 1; object-fit: cover; cursor: zoom-in">
+      <img src="beebitekk-heegeldatud.jpg" alt="Heegeldatud beebitekk" data-lb="1" onClick="{{ openImg }}" style="display: block; width: 100%; aspect-ratio: 1; object-fit: cover; cursor: zoom-in">
+    </div>
+    <div data-r="two" style="display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; padding: 76px 64px; background: #f8eeee">
+      <div style="display: flex; flex-direction: column; gap: 18px">
+      <a href="index.html#tooted" style="align-self: flex-start; font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: oklch(0.44 0.09 8)">← Kudumid</a>
+        <h1 style="margin: 0; font-family: Didot, 'Didot LT STD', 'Hoefler Text', 'Cormorant Garamond', Garamond, Georgia, serif; font-weight: 300; font-size: clamp(30px, 3.8vw, 52px); line-height: 1.03; letter-spacing: -0.02em">Beebidele</h1>
+        <p style="margin: 0; max-width: 46ch; font-size: 16.5px; line-height: 1.76; font-weight: 300; text-wrap: pretty">Sina, kes Sa siia maailma alles tuled – olgu Su algus ümbritsetud pehmuse ja luksusega. Meriinovillane või siidi-silla-siidisegune tekike on just õige Sinu magusat und valvama. Vastavalt Sinu soovile koon erinevaid mustreid, klassikalise beebiteki mõõduks on <span style="font-size: 19px; color: oklch(0.44 0.09 8); white-space: nowrap">90×90 kuni 100x100 cm</span></p>
+      <a href="#kontakt" style="align-self: flex-start; margin-top: 6px; padding: 15px 28px; background: oklch(0.44 0.09 8); color: #fdf7f6; border-radius: 999px; font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase" style-hover="background: oklch(0.36 0.08 8); color: #fdf7f6">Telli tekk</a>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 16px">
+      <div style="display: flex; flex-direction: column; max-width: 100%">
+        <div style="display: flex; justify-content: space-between; gap: 20px; padding: 16px 0; border-top: 1px solid rgba(0,0,0,0.16)">
+          <span style="font-size: 16.5px; font-weight: 300">100% meriinovillane tekike</span>
+          <span style="font-size: 23px; white-space: nowrap">130 €</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; gap: 20px; padding: 16px 0; border-top: 1px solid rgba(0,0,0,0.16); border-bottom: 1px solid rgba(0,0,0,0.16)">
+          <span style="font-size: 16.5px; font-weight: 300">70-20-10% villa-siidi-kašmiirisegu tekike</span>
+          <span style="font-size: 23px; white-space: nowrap">150 €</span>
+        </div>
+      </div>
+        <p style="margin: 0; max-width: 56ch; font-size: 15.5px; line-height: 1.7; font-weight: 300; text-wrap: pretty">Muster ja värv valime koos. Kõik tekid jõuavad tellijani kinkekarbis ja koos hooldusjuhendiga.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="tekid" data-screen-label="Tekid" style="display: flex; flex-direction: column; gap: 24px; padding: 72px 64px; border-bottom: 1px solid rgba(0,0,0,0.09)">
+    <div data-r="galerii" style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-auto-rows: max-content; align-content: start; gap: 12px">
+      <img src="beebitekk-mundiroheline.jpg" alt="Mündiroheline beebitekk, ümara lehe kiri" data-lb="1" onClick="{{ openImg }}" style="display: block; width: 100%; aspect-ratio: 1; object-fit: cover; cursor: zoom-in">
+      <img src="beebitekk-valge-sudamekiri.jpg" alt="Valge südamekirjaline beebitekk" data-lb="1" onClick="{{ openImg }}" style="display: block; width: 100%; aspect-ratio: 1; object-fit: cover; cursor: zoom-in">
+      <img src="beebitekk-meresinine.jpg" alt="Meresinine meriinovillane beebitekk" data-lb="1" onClick="{{ openImg }}" style="display: block; width: 100%; aspect-ratio: 1; object-fit: cover; cursor: zoom-in">
+      <img src="beebitekk-helesinine.jpg" alt="Helesinine meriinovillane beebitekike" data-lb="1" onClick="{{ openImg }}" style="display: block; width: 100%; aspect-ratio: 1; object-fit: cover; cursor: zoom-in">
+      <img src="beebitekk-mundiroheline-2.jpg" alt="Mündiroheline meriinovillane beebitekk" data-lb="1" onClick="{{ openImg }}" style="display: block; width: 100%; aspect-ratio: 1; object-fit: cover; cursor: zoom-in">
+      <img src="beebitekk-beebiroosa.jpg" alt="Beebiroosa ümaras lehekirjas beebitekk" data-lb="1" onClick="{{ openImg }}" style="display: block; width: 100%; aspect-ratio: 1; object-fit: cover; cursor: zoom-in">
+      <img src="beebitekk-sudamekiri-valge.jpg" alt="Valge südamekirjaline beebitekk" data-lb="1" onClick="{{ openImg }}" style="display: block; width: 100%; aspect-ratio: 1; object-fit: cover; cursor: zoom-in">
+      <img src="beebitekk.jpg" alt="Beebitekk" data-lb="1" onClick="{{ openImg }}" style="display: block; width: 100%; aspect-ratio: 1; object-fit: cover; cursor: zoom-in">
+    </div>
+  </section>
+
+  <section id="telli" data-screen-label="Tellimine" style="padding: 84px 64px; background: oklch(0.88 0.045 12); border-bottom: 1px solid rgba(0,0,0,0.09)">
+    <div style="max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 22px">
+      <p style="margin: 0; font-size: clamp(23px, 2.3vw, 32px); line-height: 1.42; text-wrap: pretty">Tellimiseks kirjuta või helista:</p>
+      <span style="display: flex; flex-wrap: wrap; justify-content: center; gap: 12px 34px">
+        <a href="mailto:haapsall@gmail.com" style="font-size: clamp(19px, 2vw, 26px); border-bottom: 1px solid rgba(0,0,0,0.4); padding-bottom: 4px" style-hover="color: oklch(0.44 0.09 8); border-color: oklch(0.44 0.09 8)">haapsall@gmail.com</a>
+        <a href="tel:+37256488348" style="font-size: clamp(19px, 2vw, 26px); border-bottom: 1px solid rgba(0,0,0,0.4); padding-bottom: 4px" style-hover="color: oklch(0.44 0.09 8); border-color: oklch(0.44 0.09 8)">+372 56 488348</a>
+      </span>
+    </div>
+  </section>
+
+  <section id="kontakt" data-screen-label="Kontakt" style="padding: 96px 64px; background: #000000; color: #f8eeee">
+    <div data-r="two" style="display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 64px">
+      <div style="display: flex; flex-direction: column; gap: 22px">
+        <h2 style="margin: 0; font-family: Didot, 'Didot LT STD', 'Hoefler Text', 'Cormorant Garamond', Garamond, Georgia, serif; font-weight: 300; font-size: clamp(30px, 3.2vw, 46px); line-height: 1.1">Võta ühendust</h2>
+        <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 12px; font-size: 15.5px; font-weight: 300">
+          <span style="opacity: 0.6; font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase">Kontakt</span>
+          <a href="mailto:haapsall@gmail.com" style="color: #f8eeee; border-bottom: 1px solid rgba(248,238,238,0.35); align-self: flex-start" style-hover="color: #fff; border-color: #fff">haapsall@gmail.com</a>
+          <a href="tel:+37256488348" style="color: #f8eeee; border-bottom: 1px solid rgba(248,238,238,0.35); align-self: flex-start" style-hover="color: #fff; border-color: #fff">+372 56 488348</a>
+          <a href="https://www.facebook.com/Haapsalusallid" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 10px; color: #f8eeee; border-bottom: 1px solid rgba(248,238,238,0.35); align-self: flex-start" style-hover="color: #fff; border-color: #fff">
+            <svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor" aria-hidden="true"><path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5.02 3.66 9.18 8.44 9.94v-7.03H7.9v-2.91h2.54V9.85c0-2.51 1.49-3.9 3.77-3.9 1.1 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.78-1.63 1.57v1.88h2.77l-.44 2.91h-2.33V22c4.78-.76 8.44-4.92 8.44-9.94z"></path></svg>
+            Haapsalu sallid
+          </a>
+          <span style="opacity: 0.75; margin-top: 8px">Filato OÜ; reg.nr: 14401197</span>
+        </div>
+      </div>
+
+      <form onSubmit="{{ submit }}" data-r="form" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px">
+        <label style="display: flex; flex-direction: column; gap: 8px; font-size: 12.5px; letter-spacing: 0.16em; text-transform: uppercase">
+          <span>Nimi *</span>
+          <input type="text" name="nimi" value="{{ f_nimi }}" onChange="{{ onNimi }}" style="padding: 14px 0; background: none; border: none; border-bottom: 1px solid rgba(248,238,238,0.4); outline: none; font-size: 16px; letter-spacing: 0; text-transform: none" style-focus="border-color: #fff">
+          <span style="font-size: 12px; letter-spacing: 0; text-transform: none; color: oklch(0.78 0.13 30); min-height: 16px">{{ e_nimi }}</span>
+        </label>
+        <label style="display: flex; flex-direction: column; gap: 8px; font-size: 12.5px; letter-spacing: 0.16em; text-transform: uppercase">
+          <span>E-post *</span>
+          <input type="email" name="epost" value="{{ f_epost }}" onChange="{{ onEpost }}" style="padding: 14px 0; background: none; border: none; border-bottom: 1px solid rgba(248,238,238,0.4); outline: none; font-size: 16px; letter-spacing: 0; text-transform: none" style-focus="border-color: #fff">
+          <span style="font-size: 12px; letter-spacing: 0; text-transform: none; color: oklch(0.78 0.13 30); min-height: 16px">{{ e_epost }}</span>
+        </label>
+        <label style="display: flex; flex-direction: column; gap: 8px; font-size: 12.5px; letter-spacing: 0.16em; text-transform: uppercase">
+          <span>Telefon *</span>
+          <input type="tel" name="telefon" value="{{ f_telefon }}" onChange="{{ onTelefon }}" style="padding: 14px 0; background: none; border: none; border-bottom: 1px solid rgba(248,238,238,0.4); outline: none; font-size: 16px; letter-spacing: 0; text-transform: none" style-focus="border-color: #fff">
+          <span style="font-size: 12px; letter-spacing: 0; text-transform: none; color: oklch(0.78 0.13 30); min-height: 16px">{{ e_telefon }}</span>
+        </label>
+        <label style="display: flex; flex-direction: column; gap: 8px; font-size: 12.5px; letter-spacing: 0.16em; text-transform: uppercase">
+          <span>Toote tüüp *</span>
+          <select name="toode" value="{{ f_toode }}" onChange="{{ onToode }}" style="padding: 14px 0; background: none; border: none; border-bottom: 1px solid rgba(248,238,238,0.4); outline: none; font-size: 16px; letter-spacing: 0; text-transform: none" style-focus="border-color: #fff">
+            <option value="" style="color: #000000">Vali…</option>
+            <option value="pruutkleit" style="color: #000000">Pruutkleit</option>
+            <option value="kleit" style="color: #000000">Vabaaja- või lastekleit</option>
+            <option value="sall" style="color: #000000">Haapsalu sall</option>
+            <option value="beebitekk" style="color: #000000">Lastekleit</option>
+            <option value="muu" style="color: #000000">Muu / ei tea veel</option>
+          </select>
+          <span style="font-size: 12px; letter-spacing: 0; text-transform: none; color: oklch(0.78 0.13 30); min-height: 16px">{{ e_toode }}</span>
+        </label>
+        <label style="display: flex; flex-direction: column; gap: 8px; font-size: 12.5px; letter-spacing: 0.16em; text-transform: uppercase">
+          <span>Soovitud tähtaeg *</span>
+          <input type="date" lang="et" name="tahtaeg" value="{{ f_tahtaeg }}" onChange="{{ onTahtaeg }}" style="padding: 14px 0; background: none; border: none; border-bottom: 1px solid rgba(248,238,238,0.4); outline: none; font-size: 16px; letter-spacing: 0; text-transform: none; color-scheme: dark" style-focus="border-color: #fff">
+          <span style="font-size: 12px; letter-spacing: 0; text-transform: none; color: oklch(0.78 0.13 30); min-height: 16px">{{ e_tahtaeg }}</span>
+        </label>
+        <div></div>
+        <label style="grid-column: 1 / -1; display: flex; flex-direction: column; gap: 8px; font-size: 12.5px; letter-spacing: 0.16em; text-transform: uppercase">
+          <span>Sõnum *</span>
+          <textarea name="sonum" rows="4" value="{{ f_sonum }}" onChange="{{ onSonum }}" style="padding: 14px 0; background: none; border: none; border-bottom: 1px solid rgba(248,238,238,0.4); outline: none; resize: vertical; font-size: 16px; letter-spacing: 0; text-transform: none" style-focus="border-color: #fff"></textarea>
+          <span style="font-size: 12px; letter-spacing: 0; text-transform: none; color: oklch(0.78 0.13 30); min-height: 16px">{{ e_sonum }}</span>
+        </label>
+        <div style="grid-column: 1 / -1; display: flex; align-items: center; gap: 22px; flex-wrap: wrap; margin-top: 6px">
+          <button type="submit" style="padding: 17px 34px; background: #f8eeee; color: #000000; border: none; border-radius: 999px; cursor: pointer; font-size: 14px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 500" style-hover="background: oklch(0.88 0.04 20)">Saada päring</button>
+          <span style="font-size: 14.5px; font-weight: 300">{{ status }}</span>
+        </div>
+        <p style="grid-column: 1 / -1; margin: 0; font-size: 13px; font-weight: 300; opacity: 0.6">Tähisega * väljad on kohustuslikud.</p>
+      </form>
+    </div>
+  </section>
+
+  <sc-if value="{{ lightboxOpen }}" hint-placeholder-val="{{ false }}">
+    <div data-lbx="overlay" onClick="{{ closeImg }}" style="position: fixed; inset: 0; z-index: 60; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px; padding: 40px; background: rgba(20,10,12,0.88); cursor: zoom-out">
+      <div data-lbx="row" onClick="{{ stop }}" style="display: flex; align-items: center; gap: 20px; max-width: 100%">
+        <button type="button" onClick="{{ prevImg }}" aria-label="Eelmine" style="flex: none; width: 48px; height: 48px; border-radius: 999px; border: 1px solid rgba(253,247,246,0.4); background: rgba(253,247,246,0.08); color: #fdf7f6; font-size: 20px; cursor: pointer; font-family: inherit" style-hover="background: rgba(253,247,246,0.2)">←</button>
+        <img src="{{ lightboxSrc }}" alt="{{ lightboxAlt }}" style="max-width: min(820px, 100%); max-height: 76vh; object-fit: contain; box-shadow: 0 20px 60px rgba(0,0,0,0.4)">
+        <button type="button" onClick="{{ nextImg }}" aria-label="Järgmine" style="flex: none; width: 48px; height: 48px; border-radius: 999px; border: 1px solid rgba(253,247,246,0.4); background: rgba(253,247,246,0.08); color: #fdf7f6; font-size: 20px; cursor: pointer; font-family: inherit" style-hover="background: rgba(253,247,246,0.2)">→</button>
+      </div>
+      <span style="color: #fdf7f6; font-size: 15px; font-weight: 300; letter-spacing: 0.04em">{{ lightboxAlt }}</span>
+    </div>
+  </sc-if>
+
+  <footer style="padding: 34px 64px; display: flex; flex-wrap: wrap; gap: 18px; justify-content: space-between; font-size: 13px; font-weight: 300; border-top: 1px solid rgba(0,0,0,0.09)">
+    <span>© Ivika Kübarsepp — pitskudumid käsitööna</span>
+    <span style="display: flex; gap: 22px">
+      <a href="https://www.facebook.com/Haapsalusallid" target="_blank" rel="noopener" aria-label="Facebook" style="display: inline-flex; align-items: center; gap: 8px">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5.02 3.66 9.18 8.44 9.94v-7.03H7.9v-2.91h2.54V9.85c0-2.51 1.49-3.9 3.77-3.9 1.1 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.78-1.63 1.57v1.88h2.77l-.44 2.91h-2.33V22c4.78-.76 8.44-4.92 8.44-9.94z"></path></svg>
+        Facebook
+      </a>
+      <span style="position: relative; display: inline-flex; align-items: center" onMouseEnter="{{ openSub }}" onMouseLeave="{{ closeSub }}">
+        <a href="index.html#tooted" style="display: inline-flex; align-items: center; gap: 7px">Kudumid <span style="font-size: 9px; opacity: 0.6">▾</span></a>
+        <span style="position: absolute; bottom: 100%; left: -18px; min-width: 268px; padding-bottom: 14px; opacity: {{ subOpacity }}; visibility: {{ subVis }}; transition: opacity 200ms ease">
+          <span style="display: flex; flex-direction: column; padding: 8px 0; background: #fffcfb; border: 1px solid rgba(0,0,0,0.12); box-shadow: 0 14px 34px rgba(0,0,0,0.08)">
+            <a href="perfektsed-kleidid.html" style="padding: 11px 22px; font-size: 12.5px; letter-spacing: 0.06em" style-hover="background: #f8eeee; color: oklch(0.44 0.09 8)">Perfektsed kleidid</a>
+            <a href="vabaajakleidid.html" style="padding: 11px 22px; font-size: 12.5px; letter-spacing: 0.06em" style-hover="background: #f8eeee; color: oklch(0.44 0.09 8)">Vabaaja- ja laste kleidid</a>
+            <a href="aksessuaarid.html" style="padding: 11px 22px; font-size: 12.5px; letter-spacing: 0.06em" style-hover="background: #f8eeee; color: oklch(0.44 0.09 8)">Aksessuaarid</a>
+            <a href="haapsalu-sallid.html" style="padding: 11px 22px; font-size: 12.5px; letter-spacing: 0.06em" style-hover="background: #f8eeee; color: oklch(0.44 0.09 8)">Haapsalu sallid ja -rätid</a>
+            <a href="beebidele.html" style="padding: 11px 22px; font-size: 12.5px; letter-spacing: 0.06em" style-hover="background: #f8eeee; color: oklch(0.44 0.09 8)">Beebidele</a>
+            <a href="index.html#tooted" style="padding: 11px 22px; font-size: 12.5px; letter-spacing: 0.06em" style-hover="background: #f8eeee; color: oklch(0.44 0.09 8)">Laos</a>
+          </span>
+        </span>
+      </span>
+      <a href="index.html#kkk">KKK</a>
+      <a href="#kontakt">Kontakt</a>
+    </span>
+  </footer>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { subOpen: false, menuOpen: false, lightbox: null, form: { nimi: "", epost: "", telefon: "", toode: "", tahtaeg: "", sonum: "" }, errors: {}, status: "" };
+  list = [];
+  componentDidMount() {
+    this._key = (e) => {
+      if (!this.state.lightbox) return;
+      if (e.key === "Escape") this.setState({ lightbox: null });
+      if (e.key === "ArrowRight") this.step(1);
+      if (e.key === "ArrowLeft") this.step(-1);
+    };
+    window.addEventListener("keydown", this._key);
+  }
+  componentWillUnmount() { window.removeEventListener("keydown", this._key); }
+  collect() {
+    this.list = Array.from(document.querySelectorAll("img[data-lb]")).map(i => ({ src: i.getAttribute("src"), alt: i.getAttribute("alt") }));
+  }
+  step(d) {
+    if (!this.list.length) this.collect();
+    const cur = this.state.lightbox;
+    const i = this.list.findIndex(x => x.src === cur.src);
+    const n = (i + d + this.list.length) % this.list.length;
+    this.setState({ lightbox: this.list[n] });
+  }
+  setField(k, v) {
+    this.setState(s => ({ form: Object.assign({}, s.form, { [k]: v }), errors: Object.assign({}, s.errors, { [k]: "" }), status: "" }));
+  }
+  validate() {
+    const f = this.state.form, e = {};
+    if (!f.nimi.trim()) e.nimi = "Palun sisesta oma nimi.";
+    if (!f.epost.trim()) e.epost = "Palun sisesta e-posti aadress.";
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.epost.trim())) e.epost = "Kontrolli e-posti aadressi.";
+    if (!f.telefon.trim()) e.telefon = "Palun sisesta telefoninumber.";
+    if (!f.toode) e.toode = "Palun vali toote tüüp.";
+    if (!f.tahtaeg) e.tahtaeg = "Palun vali soovitud tähtaeg.";
+    if (f.sonum.trim().length < 10) e.sonum = "Kirjuta paari lausega, mida soovid.";
+    return e;
+  }
+  submit = (ev) => {
+    ev.preventDefault();
+    const e = this.validate();
+    if (Object.keys(e).length) {
+      this.setState({ errors: e, status: "Palun täida kohustuslikud väljad." });
+      return;
+    }
+    this.setState({
+      errors: {}, status: "Aitäh! Päring on saadetud — vastan paari päeva jooksul.",
+      form: { nimi: "", epost: "", telefon: "", toode: "", tahtaeg: "", sonum: "" }
+    });
+  };
+  renderVals() {
+    const _f = this.state.form, _er = this.state.errors;
+    return {
+      f_nimi: _f.nimi, f_epost: _f.epost, f_telefon: _f.telefon, f_toode: _f.toode, f_tahtaeg: _f.tahtaeg, f_sonum: _f.sonum,
+      e_nimi: _er.nimi || "", e_epost: _er.epost || "", e_telefon: _er.telefon || "", e_toode: _er.toode || "", e_tahtaeg: _er.tahtaeg || "", e_sonum: _er.sonum || "",
+      onNimi: ev => this.setField("nimi", ev.target.value),
+      onEpost: ev => this.setField("epost", ev.target.value),
+      onTelefon: ev => this.setField("telefon", ev.target.value),
+      onToode: ev => this.setField("toode", ev.target.value),
+      onTahtaeg: ev => this.setField("tahtaeg", ev.target.value),
+      onSonum: ev => this.setField("sonum", ev.target.value),
+      submit: this.submit,
+      status: this.state.status,
+      subOpacity: this.state.subOpen ? 1 : 0,
+      subVis: this.state.subOpen ? "visible" : "hidden",
+      openSub: () => this.setState({ subOpen: true }),
+      closeSub: () => this.setState({ subOpen: false }),
+      lightboxOpen: !!this.state.lightbox,
+      lightboxSrc: this.state.lightbox ? this.state.lightbox.src : "",
+      lightboxAlt: this.state.lightbox ? this.state.lightbox.alt : "",
+      openImg: (e) => { this.collect(); this.setState({ lightbox: { src: e.currentTarget.getAttribute("src"), alt: e.currentTarget.getAttribute("alt") } }); },
+      closeImg: () => this.setState({ lightbox: null }),
+      prevImg: (e) => { e.stopPropagation(); this.step(-1); },
+      nextImg: (e) => { e.stopPropagation(); this.step(1); },
+      stop: (e) => e.stopPropagation(),
+      menuH: this.state.menuOpen ? "760px" : "0px",
+      toggleMenu: () => this.setState(s => ({ menuOpen: !s.menuOpen }))
+    };
+  }
+}
+</script>
+</body>
+</html>
